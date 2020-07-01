@@ -14,4 +14,8 @@ export class ConduitTagsPopularComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  select(tag) {
+    this.onSelected.emit(tag);
+  }
 }

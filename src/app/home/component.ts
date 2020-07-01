@@ -20,5 +20,12 @@ export class ConduitPagesHomeComponent implements OnInit {
       (this.articles = state.articles), (this.tags = state.tags);
     });
   }
-  setListTo(input) {}
+
+  onTagSelected(id) {
+    console.log(id);
+  }
+
+  onFeedSelected(id) {
+    console.log(id);
+  }
 }
