@@ -28,4 +28,12 @@ export class ConduitPagesHomeComponent implements OnInit {
   onFeedSelected(id) {
     console.log(id);
   }
+
+  onArticleSelected(article) {
+    console.log(article);
+  }
+  
+  onAuthorSelected(author) {
+    console.log(author);
+  }
 }

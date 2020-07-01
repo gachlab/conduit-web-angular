@@ -4,7 +4,7 @@ import { ConduitPagesHomeComponent } from './component';
 import { ConduitPagesHomeRoutingModule } from './routing.module';
 import { ConduitArticlesFeedModule } from '../articles/feeds/module';
 import { ConduitTagsPopularModule } from '../tags/popular/module';
-
+import { ConduitArticlesListModule } from '../articles/list/module';
 import { ConduitPagesHomeService } from './service';
 @NgModule({
   declarations: [ConduitPagesHomeComponent],
@@ -13,6 +13,7 @@ import { ConduitPagesHomeService } from './service';
     ConduitPagesHomeRoutingModule,
     ConduitTagsPopularModule,
     ConduitArticlesFeedModule,
+    ConduitArticlesListModule,
   ],
   exports: [],
   providers: [ConduitPagesHomeService],

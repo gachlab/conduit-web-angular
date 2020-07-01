@@ -1,0 +1,15 @@
+<app-conduit-articles-preview
+  *ngFor="let article of articles"
+  [article]="article"
+  (onArticleSelected)="selectArticle($event)"
+  (onAuthorSelected)="selectAuthor($event)"
+>
+</app-conduit-articles-preview>
+
+<div class="app-article-preview" [hidden]="!loading">
+  Loading articles...
+</div>
+
+<div class="app-article-preview" [hidden]="loading || articles.length">
+  No articles are here... yet.
+</div>

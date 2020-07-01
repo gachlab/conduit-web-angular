@@ -1,5 +1,5 @@
 <div class="home-page">
-  <div class="banner" *appShowAuthed="false">
+  <div class="banner">
     <div class="container">
       <h1 class="logo-font">conduit</h1>
       <p>A place to share your <i>Angular</i> knowledge.</p>
@@ -12,7 +12,13 @@
         <app-conduit-articles-feeds
           (onSelected)="onFeedSelected($event)"
         ></app-conduit-articles-feeds>
-        <!-- <app-article-list [limit]="10" [config]="listConfig"></app-article-list> -->
+
+        <app-conduit-articles-list
+          [articles]="articles"
+          (onArticleSelected)="onArticleSelected($event)"
+          (onAuthorSelected)="onAuthorSelected($event)"
+        >
+        </app-conduit-articles-list>
       </div>
 
       <div class="col-md-3">
