@@ -1,32 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConduitPagesHomeService } from './service';
 
 @Component({
   selector: 'app-conduit-pages-home',
   templateUrl: './template.html',
-  styleUrls: ['./styles.scss'],
 })
 export class ConduitPagesHomeComponent implements OnInit {
-  constructor(private router: Router) {}
-
-  isAuthenticated: boolean;
+  constructor(private service: ConduitPagesHomeService) {}
   listConfig: any = {
     type: 'all',
     filters: {},
   };
+  articles: Array<any> = [];
   tags: Array<string> = [];
-  tagsLoaded = false;
 
-  ngOnInit() {}
-
-  setListTo(type: string = '', filters: Object = {}) {
-    // If feed is requested but user is not authenticated, redirect to login
-    if (type === 'feed' && !this.isAuthenticated) {
-      this.router.navigateByUrl('/login');
-      return;
-    }
-
-    // Otherwise, set the list object
-    this.listConfig = { type: type, filters: filters };
+  ngOnInit() {
+    this.service.init().then((state) => {
+      (this.articles = state.articles), (this.tags = state.tags);
+    });
   }
+  setListTo(input) {}
 }
