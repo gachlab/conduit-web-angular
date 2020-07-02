@@ -13,7 +13,10 @@
           (onSelected)="onFeedSelected($event)"
         ></app-conduit-articles-feeds>
 
-        <app-conduit-articles-list [articles]="articles">
+        <app-conduit-articles-list
+          [articles]="articles"
+          (onUpdatedArticle)="onUpdatedArticle($event)"
+        >
         </app-conduit-articles-list>
       </div>
 

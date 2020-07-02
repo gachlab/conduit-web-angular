@@ -10,19 +10,13 @@ export class ConduitArticlesListComponent implements OnInit {
   articles: Array<any> = [];
   loading: boolean = true;
   @Output()
-  onArticleSelected: EventEmitter<string> = new EventEmitter();
-  @Output()
-  onAuthorSelected: EventEmitter<string> = new EventEmitter();
+  onUpdatedArticle: EventEmitter<boolean> = new EventEmitter();
 
   constructor() {}
 
   ngOnInit() {}
 
-  selectArticle(article) {
-    this.onArticleSelected.emit(article);
-  }
-  
-  selectAuthor(author) {
-    this.onAuthorSelected.emit(author);
+  updatedArticle(article) {
+    this.onUpdatedArticle.emit(article);
   }
 }

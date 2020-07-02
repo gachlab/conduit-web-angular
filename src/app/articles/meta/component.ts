@@ -8,14 +8,7 @@ export class ConduitArticlesMetaComponent implements OnInit {
   @Input()
   article: any;
 
-  @Output()
-  onSelected: EventEmitter<string> = new EventEmitter();
-
   constructor() {}
 
   ngOnInit() {}
-
-  select(author) {
-    this.onSelected.emit(author);
-  }
 }

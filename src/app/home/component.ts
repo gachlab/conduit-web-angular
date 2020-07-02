@@ -6,9 +6,7 @@ import { ConduitPagesHomeService } from './service';
   templateUrl: './template.html',
 })
 export class ConduitPagesHomeComponent implements OnInit {
-  constructor(
-    private service: ConduitPagesHomeService
-  ) {}
+  constructor(private service: ConduitPagesHomeService) {}
   listConfig: any = {
     type: 'all',
     filters: {},
@@ -23,11 +21,15 @@ export class ConduitPagesHomeComponent implements OnInit {
     });
   }
 
-  onTagSelected(id) {
-    console.log(id);
+  onTagSelected(tag) {
+    console.log(tag);
   }
 
-  onFeedSelected(id) {
-    console.log(id);
+  onFeedSelected(feed) {
+    console.log(feed);
+  }
+
+  onUpdatedArticle(article) {
+    console.log(article);
   }
 }

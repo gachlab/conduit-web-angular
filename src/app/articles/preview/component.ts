@@ -9,19 +9,15 @@ export class ConduitArticlesPreviewComponent implements OnInit {
   article: any = undefined;
 
   @Output()
-  onArticleSelected: EventEmitter<string> = new EventEmitter();
-  @Output()
-  onAuthorSelected: EventEmitter<string> = new EventEmitter();
+  onUpdatedArticle: EventEmitter<true> = new EventEmitter();
 
   constructor() {}
 
   ngOnInit() {}
 
-  selectArticle(article) {
-    this.onArticleSelected.emit(article);
-  }
-
-  selectAuthor(author) {
-    this.onAuthorSelected.emit(author);
+  favoriteArticle(event) {
+    this.onUpdatedArticle.emit(
+      Object.assign(event.article, { favorited: event.favorite })
+    );
   }
 }
