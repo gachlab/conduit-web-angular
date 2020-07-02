@@ -5,12 +5,12 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./home/module').then((m) => m.ConduitPagesHomeModule),
+      import('./home-page/module').then((m) => m.ConduitPagesHomeModule),
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{useHash:true})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

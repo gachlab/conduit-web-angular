@@ -14,16 +14,31 @@ export class ConduitPagesHomeService {
     );
   }
 
+  listArticlesByFeed(selectedFeed: string): Promise<Array<any>> {
+    throw selectedFeed === 'all'
+      ? this.fetchArticles()
+      : selectedFeed === 'personal'
+      ? this.fetchUserFeed()
+      : this.fetchArticles();
+  }
+
+  listArticlesByTag(tag: any) {
+    return this.fetchArticles({ limit: 10, offset: 0, tag });
+  }
+
   private fetchArticles(
     filter = {
       limit: 10,
       offset: 0,
+      tag: undefined,
     }
   ) {
     return fetch(
       `https://conduit.productionready.io/api/articles${filter ? '?' : ''}${
         filter.limit ? 'limit=' + filter.limit : ''
-      }${'&offset=' + filter.offset || 0}`
+      }${'&offset=' + filter.offset || 0}${
+        filter.tag ? 'tag=' + filter.tag : ''
+      }`
     )
       .then((response) => response.json())
       .then((articles) =>
@@ -32,14 +47,21 @@ export class ConduitPagesHomeService {
         )
       );
   }
-
-  addArticleDetailLink(article: any) {
+  private fetchUserFeed(
+    filter = {
+      limit: 10,
+      offset: 0,
+    }
+  ) {
+    return this.fetchArticles();
+  }
+  private addArticleDetailLink(article: any) {
     return Object.assign({}, article, {
       href: window.location.href + 'article/' + article.slug,
     });
   }
 
-  addProfilePageLink(article: any): any {
+  private addProfilePageLink(article: any): any {
     return Object.assign({}, article, {
       authorHref: window.location.href + 'profile/' + article.author.username,
     });

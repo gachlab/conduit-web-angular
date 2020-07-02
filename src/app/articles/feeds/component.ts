@@ -6,22 +6,15 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ConduitArticlesFeedComponent implements OnInit {
   @Input()
-  feeds: Array<any> = [
-    { id: 'personal', name: 'Your feed', selected: false },
-    { id: 'all', name: 'Global Feed', selected: true },
-  ];
-  selected: string;
+  feeds: Array<any> = [];
   @Output()
   onSelected: EventEmitter<string> = new EventEmitter();
 
   constructor() {}
 
-  ngOnInit() {
-    this.selected = this.feeds[1].id;
-  }
+  ngOnInit() {}
 
   select(id) {
-    this.selected = id;
     this.onSelected.emit(id);
   }
 }

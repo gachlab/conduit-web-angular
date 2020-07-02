@@ -3,7 +3,7 @@
     <li *ngFor="let feed of feeds" class="nav-item">
       <a
         class="nav-link"
-        [ngClass]="{'active': selected===feed.id}"
+        [ngClass]="{'active': feed.selected}"
         (click)="select(feed.id)"
       >
         {{feed.name}}
