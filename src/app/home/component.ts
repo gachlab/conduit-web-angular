@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { ConduitPagesHomeService } from './service';
 
 @Component({
@@ -7,7 +6,9 @@ import { ConduitPagesHomeService } from './service';
   templateUrl: './template.html',
 })
 export class ConduitPagesHomeComponent implements OnInit {
-  constructor(private service: ConduitPagesHomeService) {}
+  constructor(
+    private service: ConduitPagesHomeService
+  ) {}
   listConfig: any = {
     type: 'all',
     filters: {},
@@ -17,7 +18,8 @@ export class ConduitPagesHomeComponent implements OnInit {
 
   ngOnInit() {
     this.service.init().then((state) => {
-      (this.articles = state.articles), (this.tags = state.tags);
+      this.articles = state.articles;
+      this.tags = state.tags;
     });
   }
 
@@ -27,13 +29,5 @@ export class ConduitPagesHomeComponent implements OnInit {
 
   onFeedSelected(id) {
     console.log(id);
-  }
-
-  onArticleSelected(article) {
-    console.log(article);
-  }
-  
-  onAuthorSelected(author) {
-    console.log(author);
   }
 }

@@ -1,10 +1,10 @@
 <div class="article-meta">
-  <a (click)="select(article.author)">
+  <a [href]="article.authorHref">
     <img [src]="article.author.image" />
   </a>
 
   <div class="info">
-    <a class="author" (click)="select(article.author)">
+    <a class="author" [href]="article.authorHref">
       {{ article.author.username }}
     </a>
     <span class="date">
