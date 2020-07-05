@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class ConduitPagesHomeService {
@@ -24,6 +23,12 @@ export class ConduitPagesHomeService {
 
   listArticlesByTag(tag: any) {
     return this.fetchArticles({ limit: 10, offset: 0, tag });
+  }
+
+  private fetchTags() {
+    return fetch(
+      'https://conduit.productionready.io/api/tags'
+    ).then((response) => response.json());
   }
 
   private fetchArticles(
@@ -67,9 +72,5 @@ export class ConduitPagesHomeService {
     });
   }
 
-  private fetchTags() {
-    return fetch(
-      'https://conduit.productionready.io/api/tags'
-    ).then((response) => response.json());
-  }
+
 }

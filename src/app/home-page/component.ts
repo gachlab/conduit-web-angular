@@ -8,8 +8,8 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class ConduitPagesHomeComponent implements OnInit {
   filters = {};
-  articles: Array<any> = [];
-  tags: Array<string> = [];
+  articles: Array<any> = undefined;
+  tags: Array<string> = undefined;
   feeds: Array<{ id: string; name: string; selected: boolean }> = [];
 
   constructor(private service: ConduitPagesHomeService) {}

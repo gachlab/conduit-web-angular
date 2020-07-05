@@ -1,6 +1,14 @@
 <p>Popular Tags</p>
 
-<div class="tag-list">
+<div *ngIf="!tags">
+  Loading tags...
+</div>
+
+<div *ngIf="(tags && tags.length === 0)">
+  No tags are here... yet.
+</div>
+
+<div class="tag-list" *ngIf="(tags && tags.length > 0)">
   <a
     *ngFor="let tag of tags"
     (click)="select(tag)"
@@ -8,12 +16,4 @@
   >
     {{ tag }}
   </a>
-</div>
-
-<div [hidden]="tags.length > 0">
-  Loading tags...
-</div>
-
-<div [hidden]=" tags.length !== 0">
-  No tags are here... yet.
 </div>
