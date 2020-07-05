@@ -13,10 +13,15 @@ export class ConduitPagesHomeService {
     );
   }
 
-  listArticlesByFeed(selectedFeed: string): Promise<Array<any>> {
-    throw selectedFeed === 'all'
+  listArticlesByFeed(selectedFeed: {
+    isTag: boolean;
+    id: string;
+  }): Promise<Array<any>> {
+    return selectedFeed.isTag
+      ? this.listArticlesByTag(selectedFeed.id)
+      : selectedFeed.id === 'all'
       ? this.fetchArticles()
-      : selectedFeed === 'personal'
+      : selectedFeed.id === 'personal'
       ? this.fetchUserFeed()
       : this.fetchArticles();
   }
@@ -42,7 +47,7 @@ export class ConduitPagesHomeService {
       `https://conduit.productionready.io/api/articles${filter ? '?' : ''}${
         filter.limit ? 'limit=' + filter.limit : ''
       }${'&offset=' + filter.offset || 0}${
-        filter.tag ? 'tag=' + filter.tag : ''
+        filter.tag ? '&tag=' + filter.tag : ''
       }`
     )
       .then((response) => response.json())
@@ -71,6 +76,4 @@ export class ConduitPagesHomeService {
       authorHref: window.location.href + 'profile/' + article.author.username,
     });
   }
-
-
 }

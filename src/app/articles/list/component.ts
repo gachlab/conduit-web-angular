@@ -19,4 +19,8 @@ export class ConduitArticlesListComponent implements OnInit {
   updatedArticle(article) {
     this.onUpdatedArticle.emit(article);
   }
+
+  articleTrackBy(index, item) {
+    return item.slug;
+  }
 }

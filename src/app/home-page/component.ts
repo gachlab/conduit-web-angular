@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ConduitPagesHomeService } from './service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-conduit-pages-home',
@@ -10,7 +9,12 @@ export class ConduitPagesHomeComponent implements OnInit {
   filters = {};
   articles: Array<any> = undefined;
   tags: Array<string> = undefined;
-  feeds: Array<{ id: string; name: string; selected: boolean }> = [];
+  feeds: Array<{
+    id: string;
+    name: string;
+    selected: boolean;
+    isTag: boolean;
+  }> = [];
 
   constructor(private service: ConduitPagesHomeService) {}
 
@@ -20,7 +24,6 @@ export class ConduitPagesHomeComponent implements OnInit {
 
   onTagSelected(tag) {
     this.addTagToFeed(tag);
-    this.listArticlesByTag(tag);
   }
 
   onFeedSelected(selectedFeed) {
@@ -32,17 +35,6 @@ export class ConduitPagesHomeComponent implements OnInit {
     console.log(article);
   }
 
-  private listArticlesByTag(tag: any) {
-    this.service
-      .listArticlesByTag(tag)
-      .then((articles) => (this.articles = articles));
-  }
-
-  private listArticlesByFeed(selectedFeed: any) {
-    this.service
-      .listArticlesByFeed(selectedFeed)
-      .then((articles) => (this.articles = articles));
-  }
 
   private setInitialState(state: {
     articles: Array<any>;
@@ -52,26 +44,36 @@ export class ConduitPagesHomeComponent implements OnInit {
     this.articles = state.articles;
     this.tags = state.tags;
     this.feeds = [
-      { id: 'personal', name: 'Your feed', selected: false },
-      { id: 'all', name: 'Global Feed', selected: true },
+      { id: 'personal', name: 'Your feed', selected: false, isTag: false },
+      { id: 'all', name: 'Global Feed', selected: true, isTag: false },
     ];
   }
 
-  private selectFeed(selectedFeedId: string) {
+  private listArticlesByFeed(selectedFeed: any) {
+    this.service.listArticlesByFeed(selectedFeed).then((articles) => {
+      this.articles = articles;
+    });
+  }
+
+
+  private selectFeed(selectedFeed: any) {
     this.feeds = this.feeds.map((feed) =>
-      Object.assign(feed, { selected: feed.id === selectedFeedId })
+      Object.assign(feed, { selected: feed.id === selectedFeed.id })
     );
   }
 
   private addTagToFeed(tag: string) {
+    const tagFeed = {
+      id: tag.toLowerCase(),
+      name: '#' + tag,
+      selected: true,
+      isTag: true,
+    };
+
     this.feeds = this.feeds
       .map((feed) => Object.assign(feed, { selected: false }))
-      .concat([
-        {
-          id: tag.toLowerCase(),
-          name: '#' + tag,
-          selected: true,
-        },
-      ]);
+      .concat([tagFeed]);
+
+    this.listArticlesByFeed(tagFeed);
   }
 }

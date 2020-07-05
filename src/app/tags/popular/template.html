@@ -10,7 +10,7 @@
 
 <div class="tag-list" *ngIf="(tags && tags.length > 0)">
   <a
-    *ngFor="let tag of tags"
+    *ngFor="let tag of tags; trackBy:tagTrackBy"
     (click)="select(tag)"
     class="tag-default tag-pill"
   >

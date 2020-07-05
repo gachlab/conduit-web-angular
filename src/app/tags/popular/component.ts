@@ -18,4 +18,8 @@ export class ConduitTagsPopularComponent implements OnInit {
   select(tag) {
     this.onSelected.emit(tag);
   }
+
+  tagTrackBy(index, item) {
+    return item;
+  }
 }

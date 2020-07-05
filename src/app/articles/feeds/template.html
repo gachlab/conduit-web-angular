@@ -1,10 +1,10 @@
 <div class="feed-toggle">
   <ul class="nav nav-pills outline-active">
-    <li *ngFor="let feed of feeds" class="nav-item">
+    <li *ngFor="let feed of feeds; trackBy:feedTrackBy" class="nav-item">
       <a
         class="nav-link"
         [ngClass]="{'active': feed.selected}"
-        (click)="select(feed.id)"
+        (click)="select(feed)"
       >
         {{feed.name}}
       </a>

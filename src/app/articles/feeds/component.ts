@@ -14,7 +14,11 @@ export class ConduitArticlesFeedComponent implements OnInit {
 
   ngOnInit() {}
 
-  select(id) {
-    this.onSelected.emit(id);
+  select(feed) {
+    this.onSelected.emit(feed);
+  }
+
+  feedTrackBy(index, item) {
+    return item.id;
   }
 }

@@ -1,5 +1,5 @@
 <app-conduit-articles-preview
-  *ngFor="let article of articles"
+  *ngFor="let article of articles; trackBy:articleTrackBy"
   [article]="article"
   (onUpdatedArticle)="updatedArticle($event)"
 >
