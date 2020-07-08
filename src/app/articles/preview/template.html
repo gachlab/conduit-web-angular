@@ -1,13 +1,5 @@
 <div class="article-preview" *ngIf="article">
-  <app-conduit-articles-meta [article]="article">
-    <app-conduit-buttons-favorite
-      [favorited]="article.favorited"
-      (onFavorited)="favoriteArticle({article:article,favorite:$event})"
-      class="pull-xs-right"
-    >
-      {{article.favoritesCount}}
-    </app-conduit-buttons-favorite>
-  </app-conduit-articles-meta>
+  <ng-content></ng-content>
 
   <a [href]="article.href" class="preview-link">
     <h1>{{ article.title }}</h1>

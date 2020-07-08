@@ -1,14 +1,3 @@
-<app-conduit-articles-preview
-  *ngFor="let article of articles; trackBy:articleTrackBy"
-  [article]="article"
-  (onUpdatedArticle)="updatedArticle($event)"
->
-</app-conduit-articles-preview>
-
-<div class="app-article-preview" [hidden]="!loading">
-  Loading articles...
-</div>
-
-<div class="app-article-preview" [hidden]="loading || articles.length">
-  No articles are here... yet.
+<div>
+  <ng-content></ng-content>
 </div>

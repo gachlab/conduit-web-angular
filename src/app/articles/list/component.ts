@@ -4,6 +4,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   selector: 'app-conduit-articles-list',
   templateUrl: './template.html',
   styleUrls: ['./styles.scss'],
+  
 })
 export class ConduitArticlesListComponent implements OnInit {
   @Input()
@@ -15,12 +16,4 @@ export class ConduitArticlesListComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
-
-  updatedArticle(article) {
-    this.onUpdatedArticle.emit(article);
-  }
-
-  articleTrackBy(index, item) {
-    return item.slug;
-  }
 }

@@ -31,10 +31,13 @@ export class ConduitPagesHomeComponent implements OnInit {
     this.listArticlesByFeed(selectedFeed);
   }
 
-  onUpdatedArticle(article) {
+  onFavoritedArticle(article) {
     console.log(article);
   }
 
+  articleTrackBy(index, article) {
+    return article.slug;
+  }
 
   private setInitialState(state: {
     articles: Array<any>;
@@ -54,7 +57,6 @@ export class ConduitPagesHomeComponent implements OnInit {
       this.articles = articles;
     });
   }
-
 
   private selectFeed(selectedFeed: any) {
     this.feeds = this.feeds.map((feed) =>

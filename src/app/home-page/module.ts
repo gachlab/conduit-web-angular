@@ -6,6 +6,9 @@ import { ConduitArticlesFeedModule } from '../articles/feeds/module';
 import { ConduitTagsPopularModule } from '../tags/popular/module';
 import { ConduitArticlesListModule } from '../articles/list/module';
 import { ConduitPagesHomeService } from './service';
+import { ConduitArticlesPreviewModule } from '../articles/preview/module';
+import { ConduitArticlesMetaModule } from '../articles/meta/module';
+import { ConduitButtonsFavoriteModule } from '../favorite-button/module';
 @NgModule({
   declarations: [ConduitPagesHomeComponent],
   imports: [
@@ -14,6 +17,9 @@ import { ConduitPagesHomeService } from './service';
     ConduitTagsPopularModule,
     ConduitArticlesFeedModule,
     ConduitArticlesListModule,
+    ConduitArticlesPreviewModule,
+    ConduitArticlesMetaModule,
+    ConduitButtonsFavoriteModule,
   ],
   exports: [],
   providers: [ConduitPagesHomeService],
