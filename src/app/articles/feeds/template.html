@@ -3,7 +3,7 @@
     <li *ngFor="let feed of feeds; trackBy:feedTrackBy" class="nav-item">
       <a
         class="nav-link"
-        [ngClass]="{'active': feed.selected}"
+        [ngClass]="{'active': feed.id===selected}"
         (click)="select(feed)"
       >
         {{feed.name}}

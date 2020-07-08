@@ -4,52 +4,20 @@ import { Injectable } from '@angular/core';
 export class ConduitPagesHomeService {
   constructor() {}
 
-  init() {
-    return Promise.all([this.fetchArticles(), this.fetchTags()]).then(
-      ([articles, tags]) => ({
-        articles: articles,
-        tags: tags.tags,
-      })
-    );
-  }
-
-  listArticlesByFeed(selectedFeed: {
-    isTag: boolean;
-    id: string;
-  }): Promise<Array<any>> {
-    return selectedFeed.isTag
-      ? this.listArticlesByTag(selectedFeed.id)
-      : selectedFeed.id === 'all'
-      ? this.fetchArticles()
-      : selectedFeed.id === 'personal'
-      ? this.fetchUserFeed()
-      : this.fetchArticles();
-  }
-
-  listArticlesByTag(tag: any) {
-    return this.fetchArticles({ limit: 10, offset: 0, tag });
-  }
-
-  private fetchTags() {
-    return fetch(
-      'https://conduit.productionready.io/api/tags'
-    ).then((response) => response.json());
-  }
-
-  private fetchArticles(
+  fetchArticles(
     filter = {
       limit: 10,
       offset: 0,
-      tag: undefined,
+      feed: { id: 'all', name: '' },
     }
   ) {
-    return fetch(
-      `https://conduit.productionready.io/api/articles${filter ? '?' : ''}${
-        filter.limit ? 'limit=' + filter.limit : ''
-      }${'&offset=' + filter.offset || 0}${
-        filter.tag ? '&tag=' + filter.tag : ''
-      }`
-    )
+    const url = `https://conduit.productionready.io/api/articles${
+      filter ? '?' : ''
+    }${filter.limit ? 'limit=' + filter.limit : ''}${
+      '&offset=' + filter.offset || 0
+    }${filter.feed.name.includes('#') ? '&tag=' + filter.feed.id : ''}`;
+
+    return fetch(url)
       .then((response) => response.json())
       .then((articles) =>
         articles.articles.map((article) =>
@@ -57,14 +25,13 @@ export class ConduitPagesHomeService {
         )
       );
   }
-  private fetchUserFeed(
-    filter = {
-      limit: 10,
-      offset: 0,
-    }
-  ) {
-    return this.fetchArticles();
+
+  fetchTags() {
+    return fetch(
+      'https://conduit.productionready.io/api/tags'
+    ).then((response) => response.json());
   }
+
   private addArticleDetailLink(article: any) {
     return Object.assign({}, article, {
       href: window.location.href + 'article/' + article.slug,

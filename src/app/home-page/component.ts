@@ -6,29 +6,45 @@ import { ConduitPagesHomeService } from './service';
   templateUrl: './template.html',
 })
 export class ConduitPagesHomeComponent implements OnInit {
-  filters = {};
   articles: Array<any> = undefined;
   tags: Array<string> = undefined;
   feeds: Array<{
     id: string;
     name: string;
-    selected: boolean;
-    isTag: boolean;
   }> = [];
+  selectedFeed: any;
 
   constructor(private service: ConduitPagesHomeService) {}
 
   ngOnInit() {
-    this.service.init().then(this.setInitialState.bind(this));
+    this.init();
   }
 
   onTagSelected(tag) {
-    this.addTagToFeed(tag);
+    const tagFeed = {
+      id: tag.toLowerCase(),
+      name: '#' + tag,
+    };
+    this.feeds[2] = tagFeed;
+    this.selectedFeed = tagFeed.id;
+    this.service
+      .fetchArticles({
+        limit: 10,
+        offset: 0,
+        feed: tagFeed,
+      })
+      .then((articles) => (this.articles = articles));
   }
 
   onFeedSelected(selectedFeed) {
-    this.selectFeed(selectedFeed);
-    this.listArticlesByFeed(selectedFeed);
+    this.selectedFeed = selectedFeed.id;
+    this.service
+      .fetchArticles({
+        limit: 10,
+        offset: 0,
+        feed: selectedFeed,
+      })
+      .then((articles) => (this.articles = articles));
   }
 
   onFavoritedArticle(article) {
@@ -39,43 +55,20 @@ export class ConduitPagesHomeComponent implements OnInit {
     return article.slug;
   }
 
-  private setInitialState(state: {
-    articles: Array<any>;
-    tags: Array<any>;
-  }): void {
-    this.filters = {};
-    this.articles = state.articles;
-    this.tags = state.tags;
-    this.feeds = [
-      { id: 'personal', name: 'Your feed', selected: false, isTag: false },
-      { id: 'all', name: 'Global Feed', selected: true, isTag: false },
-    ];
-  }
-
-  private listArticlesByFeed(selectedFeed: any) {
-    this.service.listArticlesByFeed(selectedFeed).then((articles) => {
-      this.articles = articles;
-    });
-  }
-
-  private selectFeed(selectedFeed: any) {
-    this.feeds = this.feeds.map((feed) =>
-      Object.assign(feed, { selected: feed.id === selectedFeed.id })
-    );
-  }
-
-  private addTagToFeed(tag: string) {
-    const tagFeed = {
-      id: tag.toLowerCase(),
-      name: '#' + tag,
-      selected: true,
-      isTag: true,
-    };
-
-    this.feeds = this.feeds
-      .map((feed) => Object.assign(feed, { selected: false }))
-      .concat([tagFeed]);
-
-    this.listArticlesByFeed(tagFeed);
+  private init() {
+    Promise.all([this.service.fetchArticles(), this.service.fetchTags()])
+      .then(([articles, tags]) => ({
+        articles: articles,
+        tags: tags.tags,
+      }))
+      .then((state) => {
+        this.articles = state.articles;
+        this.tags = state.tags;
+        this.feeds = [
+          { id: 'personal', name: 'Your feed' },
+          { id: 'all', name: 'Global Feed' },
+        ];
+        this.selectedFeed = 'all';
+      });
   }
 }

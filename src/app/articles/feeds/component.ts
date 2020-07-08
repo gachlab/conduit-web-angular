@@ -7,6 +7,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ConduitArticlesFeedComponent implements OnInit {
   @Input()
   feeds: Array<any> = [];
+  @Input()
+  selected: string;
   @Output()
   onSelected: EventEmitter<string> = new EventEmitter();
 
