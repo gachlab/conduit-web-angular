@@ -15,22 +15,20 @@
           (onSelected)="onFeedSelected($event)"
         ></app-conduit-articles-feeds>
 
-        <app-conduit-articles-list>
-          <app-conduit-articles-preview
-            *ngFor="let article of articles; trackBy:articleTrackBy"
-            [article]="article"
-          >
-            <app-conduit-articles-meta [article]="article">
-              <app-conduit-buttons-favorite
-                [favorited]="article.favorited"
-                (onFavorited)="onFavoritedArticle(article)"
-                class="pull-xs-right"
-              >
-                {{article.favoritesCount}}
-              </app-conduit-buttons-favorite>
-            </app-conduit-articles-meta>
-          </app-conduit-articles-preview>
-        </app-conduit-articles-list>
+        <app-conduit-articles-preview
+          *ngFor="let article of articles; trackBy:articleTrackBy"
+          [article]="article"
+        >
+          <app-conduit-articles-meta [article]="article">
+            <app-conduit-buttons-favorite
+              [favorited]="article.favorited"
+              (onFavorited)="onFavoritedArticle(article)"
+              class="pull-xs-right"
+            >
+              {{article.favoritesCount}}
+            </app-conduit-buttons-favorite>
+          </app-conduit-articles-meta>
+        </app-conduit-articles-preview>
       </div>
 
       <div class="col-md-3">

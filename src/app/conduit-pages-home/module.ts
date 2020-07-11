@@ -5,7 +5,6 @@ import { ConduitPagesHomeService } from './service';
 import { ConduitPagesHomeRoutingModule } from './routing.module';
 import { ConduitArticlesFeedModule } from '../conduit-articles-feeds/module';
 import { ConduitTagsPopularModule } from '../conduit-tags-popular/module';
-import { ConduitArticlesListModule } from '../conduit-articles-list/module';
 import { ConduitArticlesPreviewModule } from '../conduit-articles-preview/module';
 import { ConduitArticlesMetaModule } from '../conduit-articles-meta/module';
 import { ConduitButtonsFavoriteModule } from '../conduit-buttons-favorite/module';
@@ -16,7 +15,6 @@ import { ConduitButtonsFavoriteModule } from '../conduit-buttons-favorite/module
     ConduitPagesHomeRoutingModule,
     ConduitTagsPopularModule,
     ConduitArticlesFeedModule,
-    ConduitArticlesListModule,
     ConduitArticlesPreviewModule,
     ConduitArticlesMetaModule,
     ConduitButtonsFavoriteModule,
