@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./home-page/module').then((m) => m.ConduitPagesHomeModule),
+      import('./conduit-home-page/module').then((m) => m.ConduitPagesHomeModule),
   },
 ];
 
