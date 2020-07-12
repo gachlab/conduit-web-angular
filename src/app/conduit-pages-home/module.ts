@@ -8,6 +8,7 @@ import { ConduitTagsPopularModule } from '../conduit-tags-popular/module';
 import { ConduitArticlesPreviewModule } from '../conduit-articles-preview/module';
 import { ConduitArticlesMetaModule } from '../conduit-articles-meta/module';
 import { ConduitButtonsFavoriteModule } from '../conduit-buttons-favorite/module';
+import { ConduitLayoutPaginationModule } from '../conduit-layout-pagination/module';
 @NgModule({
   declarations: [ConduitPagesHomeComponent],
   imports: [
@@ -18,6 +19,7 @@ import { ConduitButtonsFavoriteModule } from '../conduit-buttons-favorite/module
     ConduitArticlesPreviewModule,
     ConduitArticlesMetaModule,
     ConduitButtonsFavoriteModule,
+    ConduitLayoutPaginationModule,
   ],
   exports: [],
   providers: [ConduitPagesHomeService],

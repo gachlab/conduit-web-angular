@@ -29,6 +29,12 @@
             </app-conduit-buttons-favorite>
           </app-conduit-articles-meta>
         </app-conduit-articles-preview>
+        <app-conduit-layout-pagination
+          [pages]="pages"
+          [selected]="selectedPage"
+          (onSelect)="onPageSelected($event)"
+        >
+        </app-conduit-layout-pagination>
       </div>
 
       <div class="col-md-3">

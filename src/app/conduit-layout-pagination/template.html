@@ -1,0 +1,9 @@
+<nav *ngIf="pages">
+  <ul class="pagination" *ngIf="pages.length>0">
+    <span *ngFor="let page of pages">
+      <li [ngClass]="{'active':selected==page}" class="page-item">
+        <a class="page-link" (click)="onSelect.emit(page)">{{page}}</a>
+      </li>
+    </span>
+  </ul>
+</nav>

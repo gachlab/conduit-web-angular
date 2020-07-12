@@ -13,6 +13,8 @@ export class ConduitPagesHomeComponent implements OnInit {
     name: string;
   }> = [];
   selectedFeed: any;
+  pages: any;
+  selectedPage: any;
 
   constructor(private service: ConduitPagesHomeService) {}
 
@@ -21,34 +23,31 @@ export class ConduitPagesHomeComponent implements OnInit {
   }
 
   onTagSelected(tag) {
-    const tagFeed = {
-      id: tag.toLowerCase(),
-      name: '#' + tag,
-    };
-    this.feeds[2] = tagFeed;
-    this.selectedFeed = tagFeed.id;
     this.service
-      .fetchArticles({
-        limit: 10,
-        offset: 0,
-        feed: tagFeed,
+      .onTagSelected({
+        tag,
+        state: this.getState(),
       })
-      .then((articles) => (this.articles = articles));
+      .then((state) => this.setState(state));
   }
 
-  onFeedSelected(selectedFeed) {
-    this.selectedFeed = selectedFeed.id;
+  onFeedSelected(feed) {
     this.service
-      .fetchArticles({
-        limit: 10,
-        offset: 0,
-        feed: selectedFeed,
+      .onFeedSelected({
+        feed: feed,
+        state: this.getState(),
       })
-      .then((articles) => (this.articles = articles));
+      .then((state) => this.setState(state));
   }
 
   onFavoritedArticle(article) {
     console.log(article);
+  }
+
+  onPageSelected(page) {
+    this.service
+      .onPageSelected({ page, state: this.getState() })
+      .then((state) => this.setState(state));
   }
 
   articleTrackBy(index, article) {
@@ -56,19 +55,35 @@ export class ConduitPagesHomeComponent implements OnInit {
   }
 
   private init() {
-    Promise.all([this.service.fetchArticles(), this.service.fetchTags()])
-      .then(([articles, tags]) => ({
-        articles: articles,
-        tags: tags.tags,
-      }))
-      .then((state) => {
-        this.articles = state.articles;
-        this.tags = state.tags;
-        this.feeds = [
-          { id: 'personal', name: 'Your feed' },
-          { id: 'all', name: 'Global Feed' },
-        ];
-        this.selectedFeed = 'all';
-      });
+    this.service.init().then((state) => this.setState(state));
+  }
+
+  private getState() {
+    return JSON.parse(
+      JSON.stringify({
+        articles: this.articles,
+        pages: this.pages,
+        tags: this.tags,
+        feeds: this.feeds,
+        selectedFeed: this.selectedFeed,
+        selectedPage: this.selectedPage,
+      })
+    );
+  }
+
+  private setState(input: {
+    articles: any[];
+    pages: any;
+    tags: string[];
+    feeds: { id: string; name: string }[];
+    selectedFeed: any;
+    selectedPage: any;
+  }) {
+    this.articles = input.articles;
+    this.pages = input.pages;
+    this.tags = input.tags;
+    this.feeds = input.feeds;
+    this.selectedFeed = input.selectedFeed;
+    this.selectedPage = input.selectedPage;
   }
 }
