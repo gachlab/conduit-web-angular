@@ -26,18 +26,18 @@ export class ConduitPagesHomeComponent implements OnInit {
     this.service
       .onTagSelected({
         tag,
-        state: this.getState(),
+        state: Object.assign({}, this.state),
       })
-      .then((state) => this.setState(state));
+      .then((state) => (this.state = Object.assign({}, state)));
   }
 
   onFeedSelected(feed) {
     this.service
       .onFeedSelected({
         feed: feed,
-        state: this.getState(),
+        state: Object.assign({}, this.state),
       })
-      .then((state) => this.setState(state));
+      .then((state) => (this.state = Object.assign({}, state)));
   }
 
   onFavoritedArticle(article) {
@@ -46,8 +46,8 @@ export class ConduitPagesHomeComponent implements OnInit {
 
   onPageSelected(page) {
     this.service
-      .onPageSelected({ page, state: this.getState() })
-      .then((state) => this.setState(state));
+      .onPageSelected({ page, state: Object.assign({}, this.state) })
+      .then((state) => (this.state = Object.assign({}, state)));
   }
 
   articleTrackBy(index, article) {
@@ -55,16 +55,8 @@ export class ConduitPagesHomeComponent implements OnInit {
   }
 
   private init() {
-    this.service.init().then((state) => this.setState(state));
-  }
-
-  private getState(): State {
-    return JSON.parse(JSON.stringify(this.state));
-  }
-
-  private setState(input: State) {
-    Object.keys(input).forEach(
-      (property) => (this.state[property] = input[property])
-    );
+    this.service
+      .init()
+      .then((state) => (this.state = Object.assign({}, state)));
   }
 }
