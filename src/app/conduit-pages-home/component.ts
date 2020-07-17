@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ConduitPagesHomeService } from './service';
+import { State } from './service';
 
 @Component({
   selector: 'app-conduit-pages-home',
   templateUrl: './template.html',
 })
 export class ConduitPagesHomeComponent implements OnInit {
-  articles: Array<any> = undefined;
-  tags: Array<string> = undefined;
-  feeds: Array<{
-    id: string;
-    name: string;
-  }> = [];
-  selectedFeed: any;
-  pages: any;
-  selectedPage: any;
+  state: State = {
+    articles: undefined,
+    pages: undefined,
+    tags: undefined,
+    feeds: undefined,
+    selectedFeed: undefined,
+    selectedPage: undefined,
+  };
 
   constructor(private service: ConduitPagesHomeService) {}
 
@@ -58,32 +58,13 @@ export class ConduitPagesHomeComponent implements OnInit {
     this.service.init().then((state) => this.setState(state));
   }
 
-  private getState() {
-    return JSON.parse(
-      JSON.stringify({
-        articles: this.articles,
-        pages: this.pages,
-        tags: this.tags,
-        feeds: this.feeds,
-        selectedFeed: this.selectedFeed,
-        selectedPage: this.selectedPage,
-      })
-    );
+  private getState(): State {
+    return JSON.parse(JSON.stringify(this.state));
   }
 
-  private setState(input: {
-    articles: any[];
-    pages: any;
-    tags: string[];
-    feeds: { id: string; name: string }[];
-    selectedFeed: any;
-    selectedPage: any;
-  }) {
-    this.articles = input.articles;
-    this.pages = input.pages;
-    this.tags = input.tags;
-    this.feeds = input.feeds;
-    this.selectedFeed = input.selectedFeed;
-    this.selectedPage = input.selectedPage;
+  private setState(input: State) {
+    Object.keys(input).forEach(
+      (property) => (this.state[property] = input[property])
+    );
   }
 }

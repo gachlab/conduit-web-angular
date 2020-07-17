@@ -10,13 +10,13 @@
     <div class="row">
       <div class="col-md-9">
         <app-conduit-articles-feeds
-          [feeds]="feeds"
-          [selected]="selectedFeed"
+          [feeds]="state.feeds"
+          [selected]="state.selectedFeed"
           (onSelected)="onFeedSelected($event)"
         ></app-conduit-articles-feeds>
 
         <app-conduit-articles-preview
-          *ngFor="let article of articles; trackBy:articleTrackBy"
+          *ngFor="let article of state.articles; trackBy:articleTrackBy"
           [article]="article"
         >
           <app-conduit-articles-meta [article]="article">
@@ -30,8 +30,8 @@
           </app-conduit-articles-meta>
         </app-conduit-articles-preview>
         <app-conduit-layout-pagination
-          [pages]="pages"
-          [selected]="selectedPage"
+          [pages]="state.pages"
+          [selected]="state.selectedPage"
           (onSelect)="onPageSelected($event)"
         >
         </app-conduit-layout-pagination>
@@ -41,7 +41,7 @@
         <div class="sidebar">
           <app-conduit-tags-popular
             (onSelected)="onTagSelected($event)"
-            [tags]="tags"
+            [tags]="state.tags"
           ></app-conduit-tags-popular>
         </div>
       </div>

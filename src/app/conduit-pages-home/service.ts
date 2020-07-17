@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class ConduitPagesHomeService {
   constructor() {}
 
-  init() {
+  init(): Promise<State> {
     const selectedPage = 1;
     const feeds = [
       { id: 'personal', name: 'Your feed' },
@@ -36,7 +36,7 @@ export class ConduitPagesHomeService {
       );
   }
 
-  onTagSelected(input: { tag; state }) {
+  onTagSelected(input: { tag; state }): Promise<State> {
     return this.selectFeed({
       feed: {
         id: input.tag.toLowerCase(),
@@ -46,18 +46,21 @@ export class ConduitPagesHomeService {
     });
   }
 
-  onFeedSelected(input: { feed; state }) {
+  onFeedSelected(input: { feed; state }): Promise<State> {
     return this.selectFeed({
       feed: input.feed,
       state: input.state,
     });
   }
 
-  onPageSelected(input: { page; state }) {
+  onPageSelected(input: { page; state }): Promise<State> {
     return this.changePage({ page: input.page, state: input.state });
   }
 
-  private selectFeed(input: { feed: { id: any; name: string }; state }) {
+  private selectFeed(input: {
+    feed: { id: any; name: string };
+    state;
+  }): Promise<State> {
     !input.state.feeds.find((f) => f.id === input.feed.id)
       ? (input.state.feeds[2] = input.feed)
       : undefined;
@@ -78,7 +81,7 @@ export class ConduitPagesHomeService {
     );
   }
 
-  private changePage(input: { page: any; state: any }) {
+  private changePage(input: { page: any; state: any }): Promise<State> {
     return this.fetchArticles({
       limit: 10,
       page: input.page,
@@ -147,7 +150,7 @@ export class ConduitPagesHomeService {
     feeds: any;
     selectedFeed: any;
     selectedPage: any;
-  }) {
+  }): State {
     return {
       articles: input.articles,
       pages: input.pages,
@@ -158,3 +161,15 @@ export class ConduitPagesHomeService {
     };
   }
 }
+
+export type State = {
+  articles: any[];
+  pages: any;
+  tags: string[];
+  feeds: {
+    id: string;
+    name: string;
+  }[];
+  selectedFeed: any;
+  selectedPage: any;
+};
