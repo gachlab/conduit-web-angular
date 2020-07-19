@@ -5,10 +5,9 @@ import { ConduitPagesHomeService } from './service';
 import { ConduitPagesHomeRoutingModule } from './routing.module';
 import { ConduitArticlesFeedModule } from '../conduit-articles-feeds/module';
 import { ConduitTagsListModule } from '../conduit-tags-list/module';
-import { ConduitArticlesPreviewModule } from '../conduit-articles-preview/module';
-import { ConduitArticlesMetaModule } from '../conduit-articles-meta/module';
-import { ConduitButtonsFavoriteModule } from '../conduit-buttons-favorite/module';
+import { ConduitArticlesListModule } from '../conduit-articles-list/module';
 import { ConduitLayoutPaginationModule } from '../conduit-layout-pagination/module';
+
 @NgModule({
   declarations: [ConduitPagesHomeComponent],
   imports: [
@@ -16,10 +15,9 @@ import { ConduitLayoutPaginationModule } from '../conduit-layout-pagination/modu
     ConduitPagesHomeRoutingModule,
     ConduitTagsListModule,
     ConduitArticlesFeedModule,
-    ConduitArticlesPreviewModule,
-    ConduitArticlesMetaModule,
-    ConduitButtonsFavoriteModule,
+
     ConduitLayoutPaginationModule,
+    ConduitArticlesListModule,
   ],
   exports: [],
   providers: [ConduitPagesHomeService],

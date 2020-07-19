@@ -14,21 +14,9 @@
           [selected]="state.selectedFeed"
           (onSelected)="onFeedSelected($event)"
         ></app-conduit-articles-feeds>
-        
-        <app-conduit-articles-preview
-          *ngFor="let article of state.articles; trackBy:articleTrackBy"
-          [article]="article"
-        >
-          <app-conduit-articles-meta [article]="article">
-            <app-conduit-buttons-favorite
-              [favorited]="article.favorited"
-              (onFavorited)="onFavoritedArticle(article)"
-              class="pull-xs-right"
-            >
-              {{article.favoritesCount}}
-            </app-conduit-buttons-favorite>
-          </app-conduit-articles-meta>
-        </app-conduit-articles-preview>
+        <app-conduit-articles-list [articles]="state.articles">
+        </app-conduit-articles-list>
+
         <app-conduit-layout-pagination
           [pages]="state.pages"
           [selected]="state.selectedPage"
