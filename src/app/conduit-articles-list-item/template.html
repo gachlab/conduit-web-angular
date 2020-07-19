@@ -1,0 +1,13 @@
+<div *ngIf="article">
+  <app-conduit-articles-preview [article]="article">
+    <app-conduit-articles-meta [article]="article">
+      <app-conduit-buttons-favorite
+        [favorited]="article.favorited"
+        (onFavorited)="onFavoritedArticle(article)"
+        class="pull-xs-right"
+      >
+        {{article.favoritesCount}}
+      </app-conduit-buttons-favorite>
+    </app-conduit-articles-meta>
+  </app-conduit-articles-preview>
+</div>

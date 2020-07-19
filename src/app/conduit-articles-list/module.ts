@@ -1,18 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConduitArticlesListComponent } from './component';
-import { ConduitArticlesPreviewModule } from '../conduit-articles-preview/module';
-import { ConduitArticlesMetaModule } from '../conduit-articles-meta/module';
-import { ConduitButtonsFavoriteModule } from '../conduit-buttons-favorite/module';
+import { ConduitArticlesListItemModule } from '../conduit-articles-list-item/module';
 
 @NgModule({
   declarations: [ConduitArticlesListComponent],
-  imports: [
-    CommonModule,
-    ConduitArticlesPreviewModule,
-    ConduitArticlesMetaModule,
-    ConduitButtonsFavoriteModule,
-  ],
+  imports: [CommonModule, ConduitArticlesListItemModule],
   exports: [ConduitArticlesListComponent],
   providers: [],
 })

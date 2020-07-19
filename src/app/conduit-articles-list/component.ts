@@ -11,4 +11,8 @@ export class ConduitArticlesListComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  articleTrackBy(index, article) {
+    return article.slug;
+  }
 }

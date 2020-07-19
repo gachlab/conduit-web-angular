@@ -40,9 +40,7 @@ export class ConduitPagesHomeComponent implements OnInit {
       .then((state) => (this.state = Object.assign({}, state)));
   }
 
-  onFavoritedArticle(article) {
-    console.log(article);
-  }
+  
 
   onPageSelected(page) {
     this.service
@@ -50,10 +48,7 @@ export class ConduitPagesHomeComponent implements OnInit {
       .then((state) => (this.state = Object.assign({}, state)));
   }
 
-  articleTrackBy(index, article) {
-    return article.slug;
-  }
-
+ 
   private init() {
     this.service
       .init()
