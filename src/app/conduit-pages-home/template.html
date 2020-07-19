@@ -14,7 +14,7 @@
           [selected]="state.selectedFeed"
           (onSelected)="onFeedSelected($event)"
         ></app-conduit-articles-feeds>
-
+        
         <app-conduit-articles-preview
           *ngFor="let article of state.articles; trackBy:articleTrackBy"
           [article]="article"
@@ -39,10 +39,12 @@
 
       <div class="col-md-3">
         <div class="sidebar">
-          <app-conduit-tags-popular
+          <p>Popular Tags</p>
+
+          <app-conduit-tags-list
             (onSelected)="onTagSelected($event)"
             [tags]="state.tags"
-          ></app-conduit-tags-popular>
+          ></app-conduit-tags-list>
         </div>
       </div>
     </div>

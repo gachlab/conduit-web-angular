@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-conduit-tags-popular',
+  selector: 'app-conduit-tags-list',
   templateUrl: './template.html',
 })
-export class ConduitTagsPopularComponent implements OnInit {
+export class ConduitTagsListComponent implements OnInit {
   @Input()
   tags: Array<any> = [];
 
@@ -14,10 +14,6 @@ export class ConduitTagsPopularComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
-
-  select(tag) {
-    this.onSelected.emit(tag);
-  }
 
   tagTrackBy(index, item) {
     return item;
