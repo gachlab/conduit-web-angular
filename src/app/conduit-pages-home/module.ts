@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ConduitPagesHomeComponent } from './component';
 import { ConduitPagesHomeService } from './service';
 import { ConduitPagesHomeRoutingModule } from './routing.module';
-import { ConduitArticlesFeedModule } from '../conduit-articles-feeds/module';
-import { ConduitTagsListModule } from '../conduit-tags-list/module';
-import { ConduitArticlesListModule } from '../conduit-articles-list/module';
-import { ConduitLayoutPaginationModule } from '../conduit-layout-pagination/module';
+import { ConduitArticlesFeedModule } from '../components/conduit-articles-feeds/module';
+import { ConduitTagsListModule } from '../components/conduit-tags-list/module';
+import { ConduitArticlesListModule } from '../components/conduit-articles-list/module';
+import { ConduitLayoutPaginationModule } from '../components/conduit-layout-pagination/module';
 
 @NgModule({
   declarations: [ConduitPagesHomeComponent],
@@ -15,7 +15,6 @@ import { ConduitLayoutPaginationModule } from '../conduit-layout-pagination/modu
     ConduitPagesHomeRoutingModule,
     ConduitTagsListModule,
     ConduitArticlesFeedModule,
-
     ConduitLayoutPaginationModule,
     ConduitArticlesListModule,
   ],

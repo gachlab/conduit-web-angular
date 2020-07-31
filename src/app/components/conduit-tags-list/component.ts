@@ -7,6 +7,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ConduitTagsListComponent implements OnInit {
   @Input()
   tags: Array<any> = [];
+  @Input()
+  isOutlined: boolean = false;
 
   @Output()
   onSelected: EventEmitter<string> = new EventEmitter();

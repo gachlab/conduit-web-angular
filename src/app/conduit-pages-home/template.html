@@ -14,6 +14,7 @@
           [selected]="state.selectedFeed"
           (onSelected)="onFeedSelected($event)"
         ></app-conduit-articles-feeds>
+
         <app-conduit-articles-list [articles]="state.articles">
         </app-conduit-articles-list>
 
@@ -28,7 +29,9 @@
       <div class="col-md-3">
         <div class="sidebar">
           <p>Popular Tags</p>
-
+          <div *ngIf="(state.tags && state.tags.length === 0)">
+            No tags are here... yet.
+          </div>
           <app-conduit-tags-list
             (onSelected)="onTagSelected($event)"
             [tags]="state.tags"

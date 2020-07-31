@@ -1,0 +1,16 @@
+<div *ngIf="!tags">
+  Loading tags...
+</div>
+
+<ul class="tag-list" *ngIf="(tags && tags.length > 0)">
+  <li *ngFor="let tag of tags; trackBy:tagTrackBy">
+    <a
+      href="javascript:void(0)"
+      (click)="onSelected.emit(tag)"
+      [ngClass]="{'tag-outline':isOutlined}"
+      class="tag-default tag-pill"
+    >
+      {{ tag }}
+    </a>
+  </li>
+</ul>

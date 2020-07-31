@@ -40,15 +40,12 @@ export class ConduitPagesHomeComponent implements OnInit {
       .then((state) => (this.state = Object.assign({}, state)));
   }
 
-  
-
   onPageSelected(page) {
     this.service
       .onPageSelected({ page, state: Object.assign({}, this.state) })
       .then((state) => (this.state = Object.assign({}, state)));
   }
 
- 
   private init() {
     this.service
       .init()
