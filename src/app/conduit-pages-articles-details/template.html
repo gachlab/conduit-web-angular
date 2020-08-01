@@ -1,0 +1,53 @@
+<div class="article-page">
+  <div class="banner">
+    <div class="container">
+      <h1>{{state?.article?.title}}</h1>
+      <app-conduit-articles-meta [article]="state?.article">
+        <app-conduit-buttons-follow
+          [profile]="state?.article?.author"
+        ></app-conduit-buttons-follow>
+        <app-conduit-buttons-favorite [article]="state?.article">
+          {{state?.article?.favorited ? 'Unfavorite' : 'Favorite Article'}}
+          <span class="counter">({{state?.article?.favoritesCount}})</span>
+        </app-conduit-buttons-favorite>
+      </app-conduit-articles-meta>
+    </div>
+  </div>
+  <div class="container page">
+    <div class="row article-content">
+      <div class="col-xs-12">
+        <div>
+          <p>{{state?.article?.body}}</p>
+        </div>
+        <app-conduit-tags-list
+          [tags]="state?.article?.tagList"
+          [isOutlined]="true"
+        ></app-conduit-tags-list>
+      </div>
+    </div>
+    <hr />
+    <div class="article-actions">
+      <app-conduit-articles-meta [article]="state?.article">
+        <app-conduit-buttons-follow
+          [profile]="state?.article?.author"
+        ></app-conduit-buttons-follow>
+        <app-conduit-buttons-favorite [article]="state?.article">
+          {{state?.article?.favorited ? 'Unfavorite' : 'Favorite Article'}}
+          <span class="counter">({{state?.article?.favoritesCount}})</span>
+        </app-conduit-buttons-favorite>
+      </app-conduit-articles-meta>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-8 offset-md-2">
+        <app-conduit-articles-comments-create
+          [author]="state?.author"
+        ></app-conduit-articles-comments-create>
+
+        <app-conduit-articles-comments-list
+          [comments]="state?.comments"
+        ></app-conduit-articles-comments-list>
+      </div>
+    </div>
+  </div>
+</div>

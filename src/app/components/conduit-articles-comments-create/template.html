@@ -1,0 +1,36 @@
+<div *ngIf="!author">
+  <p>
+    <a href="/login">Sign in</a>
+    or
+    <a href="/register">sign up</a>
+    to add comments on this article.
+  </p>
+</div>
+
+<div *ngIf="author">
+  <form
+    class="card comment-form ng-untouched ng-pristine ng-valid"
+    novalidate=""
+    (submit)="postComment($event,comment)"
+  >
+    <fieldset>
+      <div class="card-block">
+        <textarea
+          class="form-control ng-pristine ng-valid ng-touched"
+          placeholder="Write a comment..."
+          rows="3"
+          (keyup)="updateComment($event.target.value)"
+        ></textarea>
+      </div>
+      <div class="card-footer">
+        <img class="comment-author-img" [src]="author.image" alt="author" />
+        <a class="comment-author" href="/profile/{{author.username}}">
+          {{author.username}}
+        </a>
+        <button class="btn btn-sm btn-primary" type="submit">
+          Post Comment
+        </button>
+      </div>
+    </fieldset>
+  </form>
+</div>

@@ -6,17 +6,14 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ConduitButtonsFavoriteComponent {
   @Input()
-  disabled: boolean = false;
-
-  @Input()
-  favorited: boolean = false;
+  article: any;
 
   @Output()
   onFavorited: EventEmitter<boolean> = new EventEmitter();
 
   constructor() {}
 
-  toggleFavorite() {
-    this.onFavorited.emit(!this.favorited);
+  favorite(article) {
+    this.onFavorited.emit(article);
   }
 }

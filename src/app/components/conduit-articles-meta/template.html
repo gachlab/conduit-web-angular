@@ -1,14 +1,14 @@
-<div class="article-meta">
+<div class="article-meta" *ngIf="article">
   <a [href]="article.authorHref">
     <img [src]="article.author.image" />
   </a>
 
   <div class="info">
-    <a class="author" [href]="article.authorHref">
-      {{ article.author.username }}
+    <a class="author" [href]="article?.authorHref">
+      {{ article?.author?.username }}
     </a>
     <span class="date">
-      {{ article.createdAt | date: 'longDate' }}
+      {{ article?.createdAt | date: 'longDate' }}
     </span>
   </div>
 

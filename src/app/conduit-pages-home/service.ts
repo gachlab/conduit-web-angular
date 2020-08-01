@@ -133,7 +133,7 @@ export class ConduitPagesHomeService {
 
   private addArticleDetailLink(article: any) {
     return Object.assign({}, article, {
-      href: window.location.href + 'article/' + article.slug,
+      href: window.location.href + 'articles/' + article.slug,
     });
   }
 
