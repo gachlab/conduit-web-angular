@@ -1,23 +1,11 @@
 <nav class="navbar navbar-light">
   <div class="container">
-    <a class="navbar-brand" routerLink="/">conduit</a>
+    <a class="navbar-brand" href="/">conduit</a>
 
-    <ul class="nav navbar-nav pull-xs-right">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/">
-          Home
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/login" routerLinkActive="active">
-          Sign in
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/register" routerLinkActive="active">
-          Sign up
+    <ul *ngIf="links" class="nav navbar-nav pull-xs-right">
+      <li *ngFor="let link of links" class="nav-item">
+        <a class="nav-link" [href]="link.href">
+          {{link.value}}
         </a>
       </li>
     </ul>

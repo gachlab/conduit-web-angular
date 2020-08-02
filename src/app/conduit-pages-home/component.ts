@@ -28,7 +28,7 @@ export class ConduitPagesHomeComponent implements OnInit {
         tag,
         state: Object.assign({}, this.state),
       })
-      .then((state) => (this.state = Object.assign({}, state)));
+      .then((state) => this.setState(state));
   }
 
   onFeedSelected(feed) {
@@ -37,18 +37,22 @@ export class ConduitPagesHomeComponent implements OnInit {
         feed: feed,
         state: Object.assign({}, this.state),
       })
-      .then((state) => (this.state = Object.assign({}, state)));
+      .then((state) => this.setState(state));
   }
 
   onPageSelected(page) {
     this.service
       .onPageSelected({ page, state: Object.assign({}, this.state) })
-      .then((state) => (this.state = Object.assign({}, state)));
+      .then((state) => this.setState(state));
   }
 
   private init() {
     this.service
       .init()
       .then((state) => (this.state = Object.assign({}, state)));
+  }
+
+  private setState(state: State): State {
+    return (this.state = Object.assign({}, state));
   }
 }
