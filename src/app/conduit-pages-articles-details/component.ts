@@ -10,6 +10,7 @@ export class ConduitPagesArticlesDetailsComponent implements OnInit {
   state = {
     article: undefined,
     comments: undefined,
+    author:undefined
   };
 
   constructor(
