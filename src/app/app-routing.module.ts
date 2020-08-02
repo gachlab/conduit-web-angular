@@ -28,6 +28,13 @@ const routes: Routes = [
         (module) => module.ConduitPagesSigninModule
       ),
   },
+  {
+    path: 'signup',
+    loadChildren: () =>
+      import('./conduit-pages-signup/module').then(
+        (module) => module.ConduitPagesSignupModule
+      ),
+  },
 ];
 
 @NgModule({
