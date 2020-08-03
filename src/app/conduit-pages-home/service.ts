@@ -5,35 +5,21 @@ export class ConduitPagesHomeService {
   constructor() {}
 
   init(): Promise<State> {
-    const selectedPage = 1;
     const feeds = [
       { id: 'personal', name: 'Your feed' },
       { id: 'all', name: 'Global Feed' },
     ];
-    const selectedFeed = feeds[1].id;
+    const selectedFeed = feeds[1];
 
     return Promise.all([
-      this.fetchArticles({
-        limit: 10,
-        page: selectedPage,
-        feed: feeds[1],
+      this.selectFeed({
+        feed: selectedFeed,
+        state: {
+          feeds: feeds,
+        },
       }),
       this.fetchTags(),
-    ])
-      .then(([articles, tags]) => ({
-        articles: articles,
-        tags: tags.tags,
-      }))
-      .then((state) =>
-        this.createState({
-          articles: state.articles.data,
-          pages: state.articles.meta.pages,
-          tags: state.tags,
-          selectedFeed,
-          feeds,
-          selectedPage,
-        })
-      );
+    ]).then(([state, tags]) => Object.assign(state, tags));
   }
 
   onTagSelected(input: { tag; state }): Promise<State> {
