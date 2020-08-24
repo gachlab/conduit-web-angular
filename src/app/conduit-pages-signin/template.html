@@ -6,10 +6,20 @@
         <p class="text-xs-center">
           <a class="" [href]="state.registration.href">Need an account?</a>
         </p>
+        <ul
+          class="error-messages"
+          *ngIf="state && state.errors && state.errors.length>0"
+        >
+          <li *ngFor="let error of state.errors">
+            {{error}}
+          </li>
+        </ul>
         <form (submit)="onSubmitted($event,state)">
           <fieldset>
             <fieldset class="form-group">
               <input
+                [value]="state?.username"
+                name="username"
                 type="email"
                 class="form-control form-control-lg"
                 placeholder="Email"
@@ -17,6 +27,8 @@
             </fieldset>
             <fieldset class="form-group">
               <input
+                [value]="state?.password"
+                name="password"
                 type="password"
                 class="form-control form-control-lg"
                 placeholder="Password"

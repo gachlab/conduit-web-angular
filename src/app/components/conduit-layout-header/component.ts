@@ -6,6 +6,8 @@ import { Component, Input } from '@angular/core';
 })
 export class ConduitLayoutHeaderComponent {
   @Input()
+  home: any;
+  @Input()
   links: any[];
   constructor() {}
 }

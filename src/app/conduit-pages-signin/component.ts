@@ -18,13 +18,19 @@ export class ConduitPagesSigninComponent implements OnInit {
     this.service.init().then((state) => this.setState(state));
   }
 
-  login() {
-    this.service.login(this.state).then(() => this.router.navigate(['/']));
+  onSubmitted(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    this.login({
+      username: data.get('username'),
+      password: data.get('password'),
+    });
   }
 
-  onSubmitted(event, state) {
-    event.preventDefault();
-    console.log(state);
+  private login(input: { username: any; password: any }) {
+    this.service
+      .login(this.state)(input)
+      .then((state) => this.setState(state));
   }
 
   private setState(state: any) {

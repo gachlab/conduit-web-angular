@@ -1,4 +1,7 @@
-<app-conduit-layout-header [links]="links"></app-conduit-layout-header>
+<app-conduit-layout-header
+  [home]="state?.header.home"
+  [links]="state?.header.links"
+></app-conduit-layout-header>
 
 <router-outlet></router-outlet>
 

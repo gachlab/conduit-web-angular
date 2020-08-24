@@ -3,17 +3,18 @@ import { NgModule } from '@angular/core';
 import { ConduitLayoutHeaderModule } from './components/conduit-layout-header/module';
 import { ConduitLayoutFooterModule } from './components/conduit-layout-footer/module';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-
+import { ConduitAppComponent } from './app.component';
+import { ConduitAppService } from './app.service';
+import { ConduitUserService } from './user.service';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [ConduitAppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ConduitLayoutHeaderModule,
     ConduitLayoutFooterModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent],
+  providers: [ConduitAppService, ConduitUserService],
+  bootstrap: [ConduitAppComponent],
 })
 export class AppModule {}
