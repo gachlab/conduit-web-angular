@@ -9,7 +9,7 @@ services:
     ports:
       - 4200    
     labels:
-      traefik.http.routers.conduit-web-angular.rule: Host(`angular.conduit.${GACHLAB_DOMAIN}`)
+      traefik.http.routers.conduit-web-angular.rule: Host(`angular-conduit.${GACHLAB_DOMAIN}`)
       traefik.http.routers.conduit-web-angular.tls.certresolver: "le"
       traefik.http.routers.conduit-web-angular.entrypoints: "websecure"
 networks: 

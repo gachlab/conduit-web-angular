@@ -2,21 +2,20 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ConduitPagesHomeService {
+  private state: any = {
+    feeds: [
+      { id: 'personal', name: 'Your feed' },
+      { id: 'all', name: 'Global Feed' },
+    ],
+    selectedFeed: { id: 'all', name: 'Global Feed' },
+  };
   constructor() {}
 
   init(): Promise<State> {
-    const feeds = [
-      { id: 'personal', name: 'Your feed' },
-      { id: 'all', name: 'Global Feed' },
-    ];
-    const selectedFeed = feeds[1];
-
     return Promise.all([
       this.selectFeed({
-        feed: selectedFeed,
-        state: {
-          feeds: feeds,
-        },
+        feed: this.state.selectedFeed,
+        state: this.state,
       }),
       this.fetchTags(),
     ]).then(([state, tags]) => Object.assign(state, tags));
@@ -40,6 +39,7 @@ export class ConduitPagesHomeService {
   }
 
   onPageSelected(input: { page; state }): Promise<State> {
+    
     return this.changePage({ page: input.page, state: input.state });
   }
 
@@ -112,9 +112,9 @@ export class ConduitPagesHomeService {
   }
 
   private fetchTags() {
-    return fetch(
-      'https://conduit.productionready.io/api/tags'
-    ).then((response) => response.json());
+    return fetch('https://conduit.productionready.io/api/tags').then(
+      (response) => response.json()
+    );
   }
 
   private addArticleDetailLink(article: any) {
